@@ -10,5 +10,5 @@ package mazegame;
  * @author jarkom
  */
 public class Tempat {
-    
+    private String isi;
 }
