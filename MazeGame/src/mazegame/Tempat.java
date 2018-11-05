@@ -5,10 +5,36 @@
  */
 package mazegame;
 
+import java.io.File;
+
 /**
  *
  * @author jarkom
  */
 public class Tempat {
+
     private String isi;
+    private int tinggi;
+    private int lebar;
+
+    public void BacaKonfigurasi(File file) {
+    }
+
+    public int hitungJumlahKress() {
+        return 0;
+    }
+
+    public int jumlah0() {
+        return 0;
+    }
+
+    public int jumlahDot() {
+        return 0;
+    }
+
+    public void hitungLebar() {
+    }
+
+    public void hitungTinggi() {
+    }
 }
