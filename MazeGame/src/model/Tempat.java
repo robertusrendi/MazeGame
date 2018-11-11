@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mazegame;
+package model;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,7 +17,16 @@ public class Tempat {
     private String isi;
     private int tinggi;
     private int lebar;
+    
+    private ArrayList<Sel> daftarSel; 
 
+    public static int batasKanan;
+    public static int batasBawah;
+
+    public Tempat() {
+        daftarSel = new ArrayList<Sel>();
+    }
+    
     public void BacaKonfigurasi(File file) {
     }
 
