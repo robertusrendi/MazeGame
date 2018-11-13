@@ -9,18 +9,20 @@ import java.awt.Color;
 
 /**
  *
- * 
+ *
  */
 public class Sel {
 
+    private int posisiX = 0;
+    private int posisiY = 0;
     private int baris;
     private int kolom;
     private int lebar;
     private int tinggi;
-
     private char nilai;
-
     private Color warna;
+    private int posisiXPemain = 1;
+    private int posisiYPemain = 1;
 
     public Sel() {
     }
@@ -45,6 +47,38 @@ public class Sel {
         this.tinggi = tinggi;
         this.nilai = nilai;
         this.warna = warna;
+    }
+
+    public int getPosisiX() {
+        return posisiX;
+    }
+
+    public void setPosisiX(int posisiX) {
+        this.posisiX = posisiX;
+    }
+
+    public int getPosisiXPemain() {
+        return posisiXPemain;
+    }
+
+    public void setPosisiXPemain(int posisiXPemain) {
+        this.posisiXPemain = posisiXPemain;
+    }
+
+    public int getPosisiY() {
+        return posisiY;
+    }
+
+    public void setPosisiY(int posisiY) {
+        this.posisiY = posisiY;
+    }
+
+    public int getPosisiYPemain() {
+        return posisiYPemain;
+    }
+
+    public void setPosisiYPemain(int posisiYPemain) {
+        this.posisiYPemain = posisiYPemain;
     }
 
     /**

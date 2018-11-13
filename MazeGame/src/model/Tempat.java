@@ -7,7 +7,11 @@ package model;
 
 import java.awt.Color;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,9 +22,7 @@ public class Tempat {
     private int tinggi; // tinggi tempat Game
     private int lebar;  // lebar tempat Game
     private ArrayList<Sel> daftarSel; // daftar sel
-
     private String isi; // isi file konfigurasi
-
     public static int batasKanan;
     public static int batasBawah;
 
@@ -35,7 +37,42 @@ public class Tempat {
      * @param file
      */
     public void bacaKonfigurasi(File file) {
+        FileInputStream fis = null;
+        Sel sel = new Sel();
+        String hasil = "";
+        int baris = 0;
+        int kolom = 0;
+        int dataInt;
+        try {
+            fis = new FileInputStream(file);
+            while ((dataInt = fis.read()) != -1) {
+                hasil = hasil + (char) dataInt;
+                if ((char) dataInt != '\n') {
+                    sel = new Sel(kolom, baris, (char) dataInt);
+                    sel.setTinggi(28);
+                    sel.setLebar(30);
+                    if (sel.getNilai() == '#') {
+                        sel.setWarna(Color.black);
+                    } else if (sel.getNilai() == '.') {
+                        sel.setWarna(Color.RED);
+                    } else if (sel.getNilai() == 'O') {
+                        sel.setWarna(Color.BLUE);
+                    }
+                    this.tambahSel(sel);
+                    kolom++;
+                } else {
+                    kolom = 0;
+                    baris++;
+                }
+            }
+            sel.setWarna(Color.red);
+            sel.setPosisiX(sel.getPosisiXPemain());
+            sel.setPosisiY(sel.getPosisiYPemain());
+            this.setIsi(hasil);
 
+        } catch (IOException ex) {
+            Logger.getLogger(Tempat.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
