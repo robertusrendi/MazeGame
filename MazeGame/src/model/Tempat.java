@@ -29,21 +29,20 @@ import javax.swing.JPanel;
  */
 public class Tempat extends JPanel implements Serializable {
 
-    private ArrayList<Tembok> tembok = new ArrayList<>();//menyimpan data tembok
-//    private ArrayList<Sel> peta = new ArrayList<>();//menyimpan data tembok,finish,pemain
+    private ArrayList<Tembok> tembok = new ArrayList<>();
     private ArrayList<Sel> sel = new ArrayList<>();
     private ArrayList peta = new ArrayList();
     private Pemain pemain;
     private Finish finish;
     private int lebarTmpt = 0;
     private int tinggiTmpt = 0;
-    private int jarak = 40;//untuk menentukan besarkan pixel/jarak space gambar didalam panel
+    private int jarak = 40;
     private String isi = "";
     public static int batasKanan;
     public static int batasBawah;
 
-    private File Alamatpeta = new File("Peta/Peta.txt");//digunakan untuk merestart level
-    private ArrayList Allperintah = new ArrayList();//menyimpan semua perintah yang dimasukkan
+    private File Alamatpeta = new File("Peta/Peta.txt");
+    private ArrayList Allperintah = new ArrayList();
     private LinkedList<String> undo = new LinkedList<>();
     private boolean completed = false;
     private String mapPeta = "";
@@ -116,10 +115,9 @@ public class Tempat extends JPanel implements Serializable {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);	   // Hapus background
-        g.setColor(new Color(255, 255, 255));//set panel warna putih
-        g.fillRect(0, 0, this.getLebarTmpt(), this.getTinggiTmpt());// set tinggiTmpt lebarTmpt sesuai konfigurasi
-
+        super.paintComponent(g);
+        g.setColor(new Color(255, 255, 255));
+        g.fillRect(0, 0, this.getLebarTmpt(), this.getTinggiTmpt());
         peta.addAll(tembok);
         peta.addAll(tembok);
         peta.add(pemain);
@@ -265,7 +263,7 @@ public class Tempat extends JPanel implements Serializable {
         boolean bantu = false;
         if (input.equalsIgnoreCase("l")) {
             for (int i = 0; i < tembok.size(); i++) {
-                Tembok wall = (Tembok) tembok.get(i);//ambil posisi tembok
+                Tembok wall = (Tembok) tembok.get(i);
                 if (pemain.PosisiKiriObjek(wall)) {
                     bantu = true;
                     break;
@@ -274,7 +272,7 @@ public class Tempat extends JPanel implements Serializable {
 
         } else if (input.equalsIgnoreCase("r")) {
             for (int i = 0; i < tembok.size(); i++) {
-                Tembok wall = (Tembok) tembok.get(i);//ambil posisi tembok
+                Tembok wall = (Tembok) tembok.get(i);
                 if (pemain.PosisiKananObjek(wall)) {
                     bantu = true;
                     break;
@@ -282,7 +280,7 @@ public class Tempat extends JPanel implements Serializable {
             }
         } else if (input.equalsIgnoreCase("u")) {
             for (int i = 0; i < tembok.size(); i++) {
-                Tembok wall = (Tembok) tembok.get(i);//ambil posisi tembok
+                Tembok wall = (Tembok) tembok.get(i);
                 if (pemain.PosisiAtasObjek(wall)) {
                     bantu = true;
                     break;
@@ -290,14 +288,14 @@ public class Tempat extends JPanel implements Serializable {
             }
         } else if (input.equalsIgnoreCase("d")) {
             for (int i = 0; i < tembok.size(); i++) {
-                Tembok wall = (Tembok) tembok.get(i);//ambil posisi tembok
+                Tembok wall = (Tembok) tembok.get(i);
                 if (pemain.PosisiBawahObjek(wall)) {
                     bantu = true;
                     break;
                 }
             }
         }
-        return bantu;//default return false
+        return bantu;
     }
 
     public void isCompleted() {
@@ -310,11 +308,11 @@ public class Tempat extends JPanel implements Serializable {
     }
 
     public void restartLevel() {
-        Allperintah.clear();//hapus semua perintah yang tersimpan
-        tembok.clear();//hapus tembok
-        peta.clear();//hapus map
-        bacaKonfigurasi(Alamatpeta);//set ulang gambar peta
-        repaint();//gambar ulang
+        Allperintah.clear();
+        tembok.clear();
+        peta.clear();
+        bacaKonfigurasi(Alamatpeta);
+        repaint();
     }
 
     public String getTeksPerintah() {
@@ -394,8 +392,6 @@ public class Tempat extends JPanel implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(Tempat.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //-
-
     }
 
     public String getMapPeta() {

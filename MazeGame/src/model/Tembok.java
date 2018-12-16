@@ -14,10 +14,9 @@ import javax.swing.ImageIcon;
  * @author Aweng
  */
 public class Tembok extends Sel {
-
-
+    
     public Tembok(int x, int y) {
-        super(x, y);//Mengakses constructor superclass (pixel) oleh subclass (Tembok) dan lsg di set nilai xy Tembok 
+        super(x, y);
         URL loc = this.getClass().getResource("tembokk.png");
         ImageIcon wall = new ImageIcon(loc);
         Image image = wall.getImage();

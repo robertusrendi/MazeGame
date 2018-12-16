@@ -16,8 +16,7 @@ import javax.swing.ImageIcon;
 public class Pemain extends Sel {
 
     public Pemain(int x, int y) {
-        super(x, y);//Mengakses constructor superclass (pixel) oleh subclass (Pemain) dan lsg di set nilai xy Pemain 
-       
+        super(x, y);
         URL loc = this.getClass().getResource("pemain.gif");
         ImageIcon img = new ImageIcon(loc);
         Image image = img.getImage();
@@ -25,8 +24,8 @@ public class Pemain extends Sel {
     }
 
     public void Gerak(int x, int y) {
-        int nx = this.getPosisiX() + x;//bergerak kiri atau kanan, tergantung nilai x jika negative maka ke kiri, positive maka ke kanan
-        int ny = this.getPosisiY() + y;//bergerak atas atau bawah, tergantung nilai y jika negative maka ke atas, positive maka ke bawah
+        int nx = this.getPosisiX() + x;
+        int ny = this.getPosisiY() + y;
         this.setPosisiX(nx);
         this.setPosisiY(ny);
     }

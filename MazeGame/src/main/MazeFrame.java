@@ -16,7 +16,6 @@ public class MazeFrame extends javax.swing.JFrame {
     public MazeFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
-
     }
 
     /**
@@ -37,17 +36,17 @@ public class MazeFrame extends javax.swing.JFrame {
         Perintah = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         OutputText = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        RestartButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         PerintahText = new javax.swing.JTextField();
         Pintas = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        OpenMenuItem = new javax.swing.JMenuItem();
         SaveMenuItem = new javax.swing.JMenuItem();
         LoadMenuItem = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        KeluarMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 51));
@@ -84,10 +83,10 @@ public class MazeFrame extends javax.swing.JFrame {
         OutputText.setRows(5);
         jScrollPane1.setViewportView(OutputText);
 
-        jButton1.setText("RESTART");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        RestartButton.setText("RESTART");
+        RestartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                RestartButtonActionPerformed(evt);
             }
         });
 
@@ -99,12 +98,6 @@ public class MazeFrame extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Total Perintah");
-
-        PerintahText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PerintahTextActionPerformed(evt);
-            }
-        });
 
         Pintas.setText("Auto");
         Pintas.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +126,7 @@ public class MazeFrame extends javax.swing.JFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(RestartButton)
                         .addGap(71, 71, 71)
                         .addComponent(Pintas)
                         .addContainerGap())
@@ -151,7 +144,7 @@ public class MazeFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Perintah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(okButton)
-                    .addComponent(jButton1)
+                    .addComponent(RestartButton)
                     .addComponent(Pintas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,13 +179,13 @@ public class MazeFrame extends javax.swing.JFrame {
 
         jMenu1.setText("MENU");
 
-        jMenuItem1.setText("Open");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        OpenMenuItem.setText("Open");
+        OpenMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                OpenMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(OpenMenuItem);
 
         SaveMenuItem.setText("Save");
         SaveMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -210,13 +203,13 @@ public class MazeFrame extends javax.swing.JFrame {
         });
         jMenu1.add(LoadMenuItem);
 
-        jMenuItem2.setText("Keluar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        KeluarMenuItem.setText("Keluar");
+        KeluarMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                KeluarMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(KeluarMenuItem);
 
         jMenuBar1.add(jMenu1);
 
@@ -237,7 +230,7 @@ public class MazeFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PerintahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerintahActionPerformed
-
+        
         peta.PerintahGerak(Perintah.getText());
         OutputText.setText(peta.getTeksPerintah());
         Perintah.setText("");
@@ -248,16 +241,16 @@ public class MazeFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_PerintahActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void RestartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartButtonActionPerformed
 
         peta.restartLevel();
         Perintah.setText("");
         OutputText.setText("");
         PerintahText.setText("");
         counter = 0;
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_RestartButtonActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void OpenMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenMenuItemActionPerformed
         int returnVal = jFileChooser1.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             file = jFileChooser1.getSelectedFile();
@@ -270,16 +263,15 @@ public class MazeFrame extends javax.swing.JFrame {
             int y = (tinggi - peta.getHeight()) / 2;
             peta.setLocation(x, y);
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_OpenMenuItemActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void KeluarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeluarMenuItemActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
+    }//GEN-LAST:event_KeluarMenuItemActionPerformed
+    
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         // TODO add your handling code here:
-
         peta.PerintahGerak(Perintah.getText());
         OutputText.setText(peta.getTeksPerintah());
         Perintah.setText("");
@@ -290,15 +282,11 @@ public class MazeFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_okButtonActionPerformed
 
-    private void PerintahTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerintahTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PerintahTextActionPerformed
-
     private void PintasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PintasActionPerformed
         // TODO add your handling code here:
         peta.restartLevel();
         peta.jalanPintas();
-        jMenuItem1.setSelected(true);
+        OpenMenuItem.setSelected(true);
     }//GEN-LAST:event_PintasActionPerformed
 
     private void SaveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveMenuItemActionPerformed
@@ -382,22 +370,22 @@ public class MazeFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem KeluarMenuItem;
     private javax.swing.JMenuItem LoadMenuItem;
+    private javax.swing.JMenuItem OpenMenuItem;
     private javax.swing.JTextArea OutputText;
     private javax.swing.JTextField Perintah;
     private javax.swing.JTextField PerintahText;
     private javax.swing.JButton Pintas;
     private javax.swing.JPanel PixelPanel;
+    private javax.swing.JButton RestartButton;
     private javax.swing.JMenuItem SaveMenuItem;
-    private javax.swing.JButton jButton1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;

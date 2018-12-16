@@ -20,12 +20,10 @@ public class TestTempat {
         Tempat tempat = new Tempat();
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             tempat.bacaKonfigurasi(jf.getSelectedFile());
-            // menampilkan atribut 'isi' dari kelas Tempat
             System.out.println("Isi peta = ");
             System.out.println(tempat.getIsi());
             if(tempat.getPeta()!=null){
                 for (int i = 0; i < tempat.getPeta().size(); i++) {
-                    // menampilkan nilai posisi Baris,posisi Kolom dan nilai
                    System.out.println(
                             tempat.getPeta().get(i).getPosisiX()+","
                             +tempat.getPeta().get(i).getPosisiY()+",");
