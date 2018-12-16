@@ -17,7 +17,7 @@ public class Finish extends Sel {
 
     public Finish(int x, int y) {
         super(x, y);//Mengakses constructor superclass (pixel) oleh subclass (Gawang) dan lsg di set nilai xy Gawang 
-        URL loc = this.getClass().getResource("/Image/finishh.png");
+        URL loc = this.getClass().getResource("finishh.png");
         ImageIcon g = new ImageIcon(loc);
         Image image = g.getImage();
         this.setImage(image);
