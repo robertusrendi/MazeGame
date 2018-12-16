@@ -38,7 +38,7 @@ public class Tempat extends JPanel implements Serializable {
     private int lebarTmpt = 0;
     private int tinggiTmpt = 0;
     private int jarak = 40;//untuk menentukan besarkan pixel/jarak space gambar didalam panel
-    private String isi;
+    private String isi = "";
     public static int batasKanan;
     public static int batasBawah;
 
@@ -46,6 +46,7 @@ public class Tempat extends JPanel implements Serializable {
     private ArrayList Allperintah = new ArrayList();//menyimpan semua perintah yang dimasukkan
     private LinkedList<String> undo = new LinkedList<>();
     private boolean completed = false;
+    private String mapPeta = "";
 
     public Tempat() {
 
@@ -70,7 +71,7 @@ public class Tempat extends JPanel implements Serializable {
     public void tambahSel(Sel sel) {
         peta.add(sel);
     }
-    
+
     public void bacaKonfigurasi(File file) {
         try {
             if (file != null) {
@@ -323,9 +324,9 @@ public class Tempat extends JPanel implements Serializable {
         }
         return bantu;
     }
-    
-    public void jalanPintas(){
-        String[] pintas = {"r4","d1","r1","d3","r1"};
+
+    public void jalanPintas() {
+        String[] pintas = {"d4", "r3", "d2", "r8"};
         for (int i = 0; i < pintas.length; i++) {
             PerintahGerak(pintas[i]);
         }
@@ -339,4 +340,69 @@ public class Tempat extends JPanel implements Serializable {
         this.sel = sel;
     }
 
+    public void saveKonfigurasi(File file) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            for (int i = 0; i < this.Allperintah.size(); i++) {
+                String data = this.Allperintah.get(i) + ",";
+                fos.write(data.getBytes());
+            }
+            fos.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Tempat.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Tempat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void loadKonfigurasi(File file) throws IOException {
+        FileInputStream fis = null;
+        try {
+            String hasilBaca = "";
+            fis = new FileInputStream(file);
+            int dataInt;
+
+            while ((dataInt = fis.read()) != -1) {
+                if ((char) dataInt == ',') {
+                    this.Allperintah.add(hasilBaca);
+                    hasilBaca = "";
+                } else {
+                    hasilBaca = hasilBaca + (char) dataInt;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Tempat.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Tempat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void save() {
+        saveKonfigurasi(new File("saveGame.dat"));
+    }
+
+    public void loadData() {
+        this.Allperintah.clear();
+        try {
+            Tempat map = new Tempat(Alamatpeta);
+            map.loadKonfigurasi(new File("saveGame.dat"));
+            for (int i = 0; i < map.Allperintah.size(); i++) {
+                PerintahGerak(map.Allperintah.get(i).toString());
+            }
+            this.saveKonfigurasi(new File("saveGame.dat"));
+        } catch (IOException ex) {
+            Logger.getLogger(Tempat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //-
+
+    }
+
+    public String getMapPeta() {
+        return mapPeta;
+    }
+
+    public void setMapPeta(String mapPeta) {
+        this.mapPeta = mapPeta;
+    }
 }
