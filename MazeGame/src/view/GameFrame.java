@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -20,13 +21,16 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import model.Sel;
+import model.Tempat;
 
 /**
  *
  * @author user only
  */
 public class GameFrame extends JFrame {
-    private TempatPanel tempatPanel;
+
+//    private TempatPanel tempatPanel;
+    private Tempat tempat;
 
     private JLabel perintahlabel;
     private JTextField perintahText;
@@ -36,21 +40,25 @@ public class GameFrame extends JFrame {
     private JMenu gameMenu;
     private JMenuItem exitMenuItem;
     private JMenuItem bacaKonfigurasiMenuItem;
+    
+    
 
     public GameFrame(String title) {
         this.setTitle(title);
         this.init();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public GameFrame(String title, TempatPanel tempatPanel) {
+    public GameFrame(String title, Tempat tempat) {
         setTitle(title);
-        this.tempatPanel = tempatPanel;
+        this.tempat = tempat;
         this.init();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void init() {
         // set ukuran dan layout
-        this.setSize(500, 300);
+        this.setSize(450, 560);
         this.setLayout(new BorderLayout());
 
         // set menu Bar
@@ -72,6 +80,31 @@ public class GameFrame extends JFrame {
         }
         );
 
+        bacaKonfigurasiMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser jf = new JFileChooser();
+                int returnValue = jf.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    Tempat tempat = new Tempat(jf.getSelectedFile());
+                    System.out.println("\nIsi peta Baru = ");
+                    System.out.println(tempat.getIsi());
+                    if (tempat.getPeta() != null) {
+                        for (int i = 0; i < tempat.getPeta().size(); i++) {
+                            // menampilkan nilai posisiX,posisiY dan nilai
+                            System.out.println(
+                                    tempat.getPeta().get(i).getPosisiX() + ","
+                                    + tempat.getPeta().get(i).getPosisiY() + ",");
+                        }
+                    }
+                }
+                Tempat.batasBawah = 450;
+                Tempat.batasKanan = 450;
+                tempat = new Tempat();
+                init();
+            }
+        });
+
         // panel selatan
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new FlowLayout());
@@ -88,47 +121,19 @@ public class GameFrame extends JFrame {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pindahKanan();
+                tempat.PerintahGerak(perintahText.getText());
             }
         });
 
         // set contentPane
         Container cp = this.getContentPane();
-        if (tempatPanel != null) {
-            cp.add(getTempatPanel(), BorderLayout.CENTER);
+        if (tempat != null) {
+            cp.add(tempat, BorderLayout.CENTER);
         }
         cp.add(southPanel, BorderLayout.SOUTH);
 
         // set visible= true
         this.setVisible(true);
-    }
-
-    /**
-     * Fungsi untuk memindahkan sel dan menggambar ulang
-     */
-    public void pindahKanan() {
-        // posisiX seluruh sel ditambah 20
-        // sehingga sel akan terlihat bergerak ke kanan
-        for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
-            // set posisiX yang baru
-            getTempatPanel().getTempat().getDaftarSel().get(i).geserKanan();
-        }
-        // gambar ulang tempat Panel
-        getTempatPanel().repaint();
-    }
-
-    /**
-     * @return the tempatPanel
-     */
-    public TempatPanel getTempatPanel() {
-        return tempatPanel;
-    }
-
-    /**
-     * @param tempatPanel the tempatPanel to set
-     */
-    public void setTempatPanel(TempatPanel tempatPanel) {
-        this.tempatPanel = tempatPanel;
     }
 
 }

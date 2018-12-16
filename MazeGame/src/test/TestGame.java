@@ -18,10 +18,11 @@ import view.TempatPanel;
 public class TestGame {
     public static void main(String[] args) {
         // buat 1 sel
-        Sel sel = new Sel(1,1 ,20,20, '@', Color.RED);
+//        Sel sel = new Sel(1,1 ,20,20, '@', Color.RED);
+        Sel sel2 = new Sel(0, 0);
         // buat 1 tempat dan tambahkan sel ke tempat
         Tempat tempat = new Tempat();
-        tempat.tambahSel(sel);
+        tempat.tambahSel(sel2);
         // Set ukuran tempat
         Tempat.batasKanan=500;
         Tempat.batasBawah=300;
@@ -29,6 +30,6 @@ public class TestGame {
         TempatPanel tempatPanel = new TempatPanel();
         tempatPanel.setTempat(tempat);
         // buat gameFrame dan tambahkan tempatPanel ke gameFrame
-        GameFrame game = new GameFrame("My Game",tempatPanel);
+        GameFrame game = new GameFrame("My Game",tempat);
     }
 }
